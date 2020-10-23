@@ -2,7 +2,6 @@
  * Interface for supplying database credentials.
  */
 export interface IIP {
-  initialise(): void;
-  getCurrentIP(): string;
+  getCurrentIP(): Promise<string>;
   getPreviousIPs(): string[];
 }

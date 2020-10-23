@@ -13,12 +13,11 @@ describe('IpService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialise', () => {
-    expect(service.initialise()).not.toThrowError;
-  });
-
-  it('ip should be equal to', () => {
-    expect(service.getCurrentIP()).toEqual('99.99.99.99');
+  it('ip should be equal to', async () => {
+    let currentIP = await service.getCurrentIP();
+    expect(currentIP).not.toEqual('');
+    expect(currentIP).not.toBeUndefined();
+    expect(currentIP).not.toBeNull();
   });
 
   it('ip array should have entry equal to', () => {

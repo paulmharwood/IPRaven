@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as publicIP from 'public-ip';
 import { IIP } from '../../business/i-ip';
 import { LoggingService } from '../logging/logging.service';
 
@@ -12,12 +13,10 @@ export class IpService implements IIP {
     logger.logInfoMessage(IpService.TAG, 'constructor started');
   }
 
-  initialise(): void {
-    this.logger.logInfoMessage(IpService.TAG, 'initialise');
-  }
-  getCurrentIP(): string {
+  async getCurrentIP() {
     this.logger.logInfoMessage(IpService.TAG, 'getCurrentIP');
-    return '99.99.99.99';
+    let currentIP = await publicIP.v4();
+    return currentIP;
   }
   getPreviousIPs(): string[] {
     this.logger.logInfoMessage(IpService.TAG, 'getPreviousIPs');

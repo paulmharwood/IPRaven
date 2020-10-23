@@ -8,9 +8,4 @@ describe('LoggingService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(LoggingService);
   });
-
-  it('should be created', () => {
-    // expect(service).toBeTruthy();
-    service.logInfoMessage('03101981', '************');
-  });
 });
