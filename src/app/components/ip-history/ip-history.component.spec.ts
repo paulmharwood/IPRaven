@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IpComponent } from './ip.component';
+import { IpHistoryComponent } from './ip-history.component';
 
-describe('IpComponent', () => {
-  let component: IpComponent;
-  let fixture: ComponentFixture<IpComponent>;
+describe('IpHistoryComponent', () => {
+  let component: IpHistoryComponent;
+  let fixture: ComponentFixture<IpHistoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IpComponent ]
+      declarations: [ IpHistoryComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IpComponent);
+    fixture = TestBed.createComponent(IpHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
