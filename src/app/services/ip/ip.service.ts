@@ -14,12 +14,18 @@ export class IpService implements IIP {
   }
 
   async getCurrentIP() {
-    this.logger.logInfoMessage(IpService.TAG, 'getCurrentIP');
+    this.logger.logInfoMessage(IpService.TAG, 'getCurrentIP started');
     let currentIP = await publicIP.v4();
+    this.logger.logInfoMessage(
+      IpService.TAG,
+      'getCurrentIP completed with ' + currentIP
+    );
     return currentIP;
   }
   getPreviousIPs(): string[] {
-    this.logger.logInfoMessage(IpService.TAG, 'getPreviousIPs');
-    return ['0.0.0.1', '0.0.0.2'];
+    this.logger.logInfoMessage(IpService.TAG, 'getPreviousIPs started');
+    let ips = ['0.0.0.1', '0.0.0.2'];
+    this.logger.logInfoMessage(IpService.TAG, 'getPreviousIPs completed');
+    return ips;
   }
 }
