@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { IpHistoryComponent } from './ip-history/ip-history.component';
 
 @NgModule({
   declarations: [AppComponent, IpHistoryComponent],
-  imports: [BrowserModule],
+  imports: [BrowserModule, NoopAnimationsModule, MatButtonModule],
   providers: [],
   bootstrap: [AppComponent],
 })
