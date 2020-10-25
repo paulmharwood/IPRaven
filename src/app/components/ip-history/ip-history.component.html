@@ -2,28 +2,27 @@
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
   rel="stylesheet"
 />
-<h1 class=".mat-body-2">
-  {{ current_ip }}
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="copyCurrentIpToClipboard()"
-  >
-    copy
-  </button>
-</h1>
-<h2 class=".mat-body-2">HISTORY</h2>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title
+      >{{ current_ip }}
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="copyCurrentIpToClipboard()"
+      >
+        copy
+      </button></mat-card-title
+    >
+    <mat-card-subtitle>{{ current_ip_fetched }}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
 
-<table>
-  <thead>
-    <th>IP</th>
-    <th>Fetched</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of ip_history">
-      <td>{{ item.ip }}</td>
-
-      <td>:{{ item.fetched }}</td>
-    </tr>
-  </tbody>
-</table>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>History</mat-card-title>
+    <mat-card-subtitle *ngFor="let item of ip_history">
+      {{ item.ip }} : {{ item.fetched }}</mat-card-subtitle
+    >
+  </mat-card-header>
+</mat-card>
