@@ -13,4 +13,18 @@
     copy
   </button>
 </h1>
-{{ current_ip_fetched }}
+<h2 class=".mat-body-2">HISTORY</h2>
+
+<table>
+  <thead>
+    <th>IP</th>
+    <th>Fetched</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of ip_history.reverse()">
+      <td>{{ item.ip }}</td>
+
+      <td>:{{ item.fetched }}</td>
+    </tr>
+  </tbody>
+</table>
