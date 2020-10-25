@@ -62,7 +62,12 @@ export class StorageService {
       StorageService.TAG,
       'saveStringArrayToStorage started with array'
     );
-    //TODO: add array to actual storage
+    localStorage.setItem(key, JSON.stringify(arrayToStore));
+    this.logger.logInfoMessage(
+      StorageService.TAG,
+      'saveStringArrayToStorage saved to local storage'
+    );
+
     this.storageArray = arrayToStore;
     this.logger.logInfoMessage(
       StorageService.TAG,
@@ -77,8 +82,13 @@ export class StorageService {
       'fetchStringArrayFromStorage started'
     );
     if (this.storageArray == undefined) {
-      //TODO: get array from storage
-      //set this.storageArray = returned array
+      this.storageArray = JSON.parse(localStorage.getItem(key));
+
+      this.logger.logInfoMessage(
+        StorageService.TAG,
+        'saveStringArrayToStorage loaded from local storage ' +
+          localStorage.getItem(key)
+      );
     }
     this.logger.logInfoMessage(
       StorageService.TAG,
