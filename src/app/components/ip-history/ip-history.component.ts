@@ -52,7 +52,10 @@ export class IpHistoryComponent implements OnInit {
     );
 
     let ipHistory = this.storageService.fetchStringArrayFromStorage(key);
-    if (ipHistory != undefined) this.ip_history = ipHistory.reverse();
+    if (ipHistory != undefined) {
+      // Use the new array concat approach as it doesn't effect original arrays.
+      this.ip_history = [].concat(ipHistory).reverse();
+    }
 
     this.loggerService.logInfoMessage(
       IpHistoryComponent.TAG,

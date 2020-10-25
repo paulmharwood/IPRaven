@@ -26,9 +26,18 @@ export class StorageService {
       if (lastElement.ip !== newElement) {
         this.logger.logInfoMessage(
           StorageService.TAG,
-          'addElementToArrayStorage element is different so pushing'
+          'addElementToArrayStorage element is different to latest ' +
+            lastElement.ip +
+            ' so pushing ' +
+            newElement
         );
         let newArray = this.storageArray;
+        newArray.forEach((element) => {
+          this.logger.logInfoMessage(
+            StorageService.TAG,
+            'addElementToArrayStorage new array object ' + element.ip
+          );
+        });
         let newArrayItem = new IPDTO(newElement);
         newArray.push(newArrayItem);
         this.saveStringArrayToStorage(key, newArray);
@@ -36,7 +45,8 @@ export class StorageService {
     } else {
       this.logger.logInfoMessage(
         StorageService.TAG,
-        'addElementToArrayStorage existing array is empty so pushing'
+        'addElementToArrayStorage existing array is empty so pushing ' +
+          newElement
       );
       let newArray: IPDTO[] = [new IPDTO(newElement)];
       this.saveStringArrayToStorage(key, newArray);
@@ -47,13 +57,13 @@ export class StorageService {
     );
   }
 
-  saveStringArrayToStorage(key: string, arryToStore: IPDTO[]) {
+  saveStringArrayToStorage(key: string, arrayToStore: IPDTO[]) {
     this.logger.logInfoMessage(
       StorageService.TAG,
       'saveStringArrayToStorage started with array'
     );
     //TODO: add array to actual storage
-    this.storageArray = arryToStore;
+    this.storageArray = arrayToStore;
     this.logger.logInfoMessage(
       StorageService.TAG,
       'saveStringArrayToStorage completed'

@@ -21,7 +21,9 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>History</mat-card-title>
-    <mat-card-subtitle *ngFor="let item of ip_history">
+    <mat-card-subtitle
+      *ngFor="let item of ip_history | slice: 0:5; let i = index"
+    >
       {{ item.ip }} : {{ item.fetched }}</mat-card-subtitle
     >
   </mat-card-header>

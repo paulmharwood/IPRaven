@@ -25,7 +25,9 @@ describe('StorageService', () => {
 
     expect(service.fetchStringArrayFromStorage('meh').length).toEqual(3);
     service.addElementToArrayStorage('IPRaven', 'Abc');
+
     expect(service.fetchStringArrayFromStorage('meh').length).toEqual(4);
+    expect(service.fetchStringArrayFromStorage('meh')[3].ip).toEqual('Abc');
     service.addElementToArrayStorage('IPRaven', 'Abc');
     expect(service.fetchStringArrayFromStorage('meh').length).toEqual(4);
   });
