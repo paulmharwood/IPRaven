@@ -20,19 +20,27 @@ export class StorageService {
       'addElementToArrayStorage started'
     );
 
-    let lastElement: IPDTO = this.storageArray[this.storageArray.length - 1];
+    if (this.storageArray != undefined) {
+      let lastElement: IPDTO = this.storageArray[this.storageArray.length - 1];
 
-    if (lastElement.ip !== newElement) {
+      if (lastElement.ip !== newElement) {
+        this.logger.logInfoMessage(
+          StorageService.TAG,
+          'addElementToArrayStorage element is different so pushing'
+        );
+        let newArray = this.storageArray;
+        let newArrayItem = new IPDTO(newElement);
+        newArray.push(newArrayItem);
+        this.saveStringArrayToStorage(key, newArray);
+      }
+    } else {
       this.logger.logInfoMessage(
         StorageService.TAG,
-        'addElementToArrayStorage element is different so pushing'
+        'addElementToArrayStorage existing array is empty so pushing'
       );
-      let newArray = this.storageArray;
-      let newArrayItem = new IPDTO(newElement);
-      newArray.push(newArrayItem);
+      let newArray: IPDTO[] = [new IPDTO(newElement)];
       this.saveStringArrayToStorage(key, newArray);
     }
-
     this.logger.logInfoMessage(
       StorageService.TAG,
       'addElementToArrayStorage completed'

@@ -29,4 +29,9 @@ describe('StorageService', () => {
     service.addElementToArrayStorage('IPRaven', 'Abc');
     expect(service.fetchStringArrayFromStorage('meh').length).toEqual(4);
   });
+
+  it('should return list of 1 ip', () => {
+    service.addElementToArrayStorage('IPRaven', 'Abc');
+    expect(service.fetchStringArrayFromStorage('meh').length).toEqual(1);
+  });
 });

@@ -2,6 +2,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { Constants } from 'src/app/business/constants';
 import { IPDTO } from 'src/app/business/ip-dto';
 import { IpService } from 'src/app/services/ip/ip.service';
 import { LoggingService } from 'src/app/services/logging/logging.service';
@@ -15,8 +16,8 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 export class IpHistoryComponent implements OnInit {
   private static TAG = 'IpHistoryComponent';
   private static KEY = 'iphistory';
-  current_ip: string;
-  current_ip_fetched: string;
+  current_ip: string = '';
+  current_ip_fetched: string = '';
   ip_history: IPDTO[];
   sub: Subscription;
 
@@ -26,22 +27,11 @@ export class IpHistoryComponent implements OnInit {
     private clipboard: Clipboard,
     private storageService: StorageService
   ) {
-    this.loggerService.logInfoMessage(
-      IpHistoryComponent.TAG,
-      'constructor started'
-    );
-
-    this.loggerService.logInfoMessage(
-      IpHistoryComponent.TAG,
-      'constructor completed'
-    );
+    this.loggerService.logInfoMessage(IpHistoryComponent.TAG, 'constructor');
   }
 
   ngOnInit(): void {
-    this.loggerService.logInfoMessage(
-      IpHistoryComponent.TAG,
-      'ngOnInit started'
-    );
+    this.loggerService.logInfoMessage(IpHistoryComponent.TAG, 'ngOnInit');
 
     this.lookupCurrentIP();
     const observable = interval(10000);
@@ -49,7 +39,6 @@ export class IpHistoryComponent implements OnInit {
 
     this.lookupIPHistory(IpHistoryComponent.KEY);
 
-    // this.lookupCurrentIP();
     this.loggerService.logInfoMessage(
       IpHistoryComponent.TAG,
       'ngOnInit completed'
@@ -61,15 +50,9 @@ export class IpHistoryComponent implements OnInit {
       IpHistoryComponent.TAG,
       'lookupIPHistory started'
     );
-    //TODO: these two will be removed, mocking data only.
-    let item1 = new IPDTO('1.0.0.1');
-    let item2 = new IPDTO('1.0.0.2');
-    let item3 = new IPDTO('1.0.0.3');
-    let arrayToSave: IPDTO[] = [item1, item2, item3];
-    this.storageService.saveStringArrayToStorage(key, arrayToSave);
-    //END
 
-    this.ip_history = this.storageService.fetchStringArrayFromStorage(key);
+    let ipHistory = this.storageService.fetchStringArrayFromStorage(key);
+    if (ipHistory != undefined) this.ip_history = ipHistory.reverse();
 
     this.loggerService.logInfoMessage(
       IpHistoryComponent.TAG,
@@ -83,21 +66,22 @@ export class IpHistoryComponent implements OnInit {
       'lookupCurrentIP started'
     );
     try {
+      // Fetch current IP and date
       this.current_ip = await this.ipService.getCurrentIP();
       this.current_ip_fetched = formatDate(
         new Date(),
-        'yyyy/MM/dd HH:mm:ss',
-        'en'
+        Constants.dateFormat,
+        Constants.locale
       );
 
+      // Attempt to add, which compares to last entry
       this.storageService.addElementToArrayStorage(
         IpHistoryComponent.KEY,
         this.current_ip
       );
 
-      this.ip_history = this.storageService.fetchStringArrayFromStorage(
-        IpHistoryComponent.KEY
-      );
+      // Re-render history binding in HTML
+      this.lookupIPHistory(IpHistoryComponent.KEY);
     } catch (err) {
       this.loggerService.logErrorMessage(IpHistoryComponent.TAG, err);
     }
