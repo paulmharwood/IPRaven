@@ -34,7 +34,7 @@ export class IpHistoryComponent implements OnInit {
     this.loggerService.logInfoMessage(IpHistoryComponent.TAG, 'ngOnInit');
 
     this.lookupCurrentIP();
-    const observable = interval(10000);
+    const observable = interval(60000);
     this.sub = observable.subscribe((x) => this.lookupCurrentIP());
 
     this.lookupIPHistory(IpHistoryComponent.KEY);
