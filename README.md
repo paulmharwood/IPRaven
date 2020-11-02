@@ -2,6 +2,8 @@
 
 Angular project that provides current IP and history of IPs. After being built, zip the dist/IPRaven folder and deploy in Chrome Extensions (using developer mode). This project was built to aid in replacing whitelisted IPs in the AWS Console (firewalls and NACLs).
 
+See [Chrome app store](https://chrome.google.com/webstore/detail/ipraven/dpagphdfnhadhbgfhfhpnfemnfdmldcp) for published version of IPRaven.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
 ## Development server
